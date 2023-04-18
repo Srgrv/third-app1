@@ -24,6 +24,18 @@ class MyPageContainer extends React.Component {
   }
 }
 
+let AuthNavigateComponent = withAuthNavigate(MyPageContainer);
+
+const mapStateToPropsForRedirect = (state) => {
+  return {
+    isAuth: state.auth.isAuth,
+  };
+};
+
+AuthNavigateComponent = connect(mapStateToPropsForRedirect)(
+  AuthNavigateComponent
+);
+
 const mapStateToProps = (state) => {
   return {
     aboutMe: state.page.user.aboutMe,
@@ -46,5 +58,5 @@ const withRouter = (Container) => {
 };
 
 export default connect(mapStateToProps, { change, add, setUser, getUser })(
-  withRouter(withAuthNavigate(MyPageContainer))
+  withRouter(AuthNavigateComponent)
 );
