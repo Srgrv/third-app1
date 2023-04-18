@@ -1,0 +1,10 @@
+.span {
+  color: white;
+}
+.pages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  user-select: none;
+}

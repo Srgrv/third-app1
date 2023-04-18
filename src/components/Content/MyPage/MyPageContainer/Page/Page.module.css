@@ -1,0 +1,27 @@
+.page {
+  text-align: center;
+}
+
+.page img {
+  border-radius: 50%;
+}
+
+.posts {
+  text-align: left;
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+}
+
+.posts img {
+  margin-right: 5px;
+}
+
+input {
+  width: 320px;
+}
