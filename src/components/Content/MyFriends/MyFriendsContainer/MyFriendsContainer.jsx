@@ -53,18 +53,6 @@ for (let i = 1; i <= 20; i++) {
   pages.push(i);
 }
 
-let AuthNavigateComponent = withAuthNavigate(MyFriendsContainer);
-
-const mapStateToPropsForNavigate = (state) => {
-  return {
-    isAuth: state.auth.isAuth,
-  };
-};
-
-AuthNavigateComponent = connect(mapStateToPropsForNavigate)(
-  AuthNavigateComponent
-);
-
 const mapStateToProps = (state) => {
   return {
     count: state.friends.count,
@@ -84,4 +72,4 @@ export default connect(mapStateToProps, {
   getUsers,
   followThunk,
   unfollowThunk,
-})(AuthNavigateComponent);
+})(withAuthNavigate(MyFriendsContainer));
