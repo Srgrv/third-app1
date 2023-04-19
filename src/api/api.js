@@ -50,4 +50,10 @@ export const profileAPI = {
       return response.data;
     });
   },
+  getProfileStatus(userId) {
+    return instance.get(`profile/status/${userId}`);
+  },
+  updateStatus(status) {
+    return instance.put(`profile/status/`, { status: status });
+  },
 };
