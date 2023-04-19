@@ -1,7 +1,7 @@
 import { profileAPI } from "../api/api";
 
 const ADD = "ADD";
-const CHANGE = "CHANGE";
+// const CHANGE = "CHANGE";
 const SET_USER = "SET_USER";
 const SET_STATUS = "SET_STATUS";
 
@@ -29,7 +29,7 @@ const defaultState = {
         "https://social-network.samuraijs.com/activecontent/images/users/9/user.jpg?v=0",
     },
   },
-  inputValue: "",
+  // inputValue: "",
   posts: ["Hello", "world"],
   status: "",
 };
@@ -40,13 +40,13 @@ const myPageReducer = (state = defaultState, action) => {
       return { ...state, status: action.status };
     case SET_USER:
       return { ...state, user: action.user };
-    case CHANGE:
-      return { ...state, inputValue: action.value };
+    // case CHANGE:
+    //   return { ...state, inputValue: action.value };
     case ADD:
       return {
         ...state,
-        posts: [...state.posts, state.inputValue],
-        inputValue: "",
+        posts: [...state.posts, action.value],
+        // inputValue: "",
       };
     default:
       return state;
@@ -57,12 +57,12 @@ export const setUser = (user) => {
   return { type: SET_USER, user };
 };
 
-export const change = (value) => {
-  return { type: CHANGE, value };
-};
+// export const change = (value) => {
+//   return { type: CHANGE, value };
+// };
 
-export const add = () => {
-  return { type: ADD };
+export const add = (value) => {
+  return { type: ADD, value };
 };
 
 export const setStatus = (status) => {
