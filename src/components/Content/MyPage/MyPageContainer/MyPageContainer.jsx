@@ -4,15 +4,22 @@ import { connect } from "react-redux";
 import { change, add, setUser, getUser } from "../../../../redux/myPageReducer";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import withAuthNavigate from "../../../../hoc/withAuthNavigate";
+import { compose } from "redux";
+import {
+  getProfileStatus,
+  updateStatus,
+} from "../../../../redux/myPageReducer";
 
 class MyPageContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.router.params.id;
 
     if (!userId) {
-      userId = 27731;
+      userId = 28418;
     }
+
     this.props.getUser(userId);
+    this.props.getProfileStatus(userId);
   }
 
   render() {
@@ -31,6 +38,7 @@ const mapStateToProps = (state) => {
     avatar: state.page.user.photos.small,
     inputValue: state.page.inputValue,
     posts: state.page.posts,
+    status: state.page.status,
     isAuth: state.auth.isAuth,
   };
 };
@@ -45,6 +53,19 @@ const withRouter = (Container) => {
   return ComponentWithRouterProp;
 };
 
-export default connect(mapStateToProps, { change, add, setUser, getUser })(
-  withRouter(withAuthNavigate(MyPageContainer))
-);
+export default compose(
+  connect(mapStateToProps, {
+    change,
+    add,
+    setUser,
+    getUser,
+    getProfileStatus,
+    updateStatus,
+  }),
+  withRouter,
+  withAuthNavigate
+)(MyPageContainer);
+
+// export default connect(mapStateToProps, { change, add, setUser, getUser })(
+//   withRouter(withAuthNavigate(MyPageContainer))
+// );

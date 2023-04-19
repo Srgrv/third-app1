@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Page.module.css";
+import Status from "./Status/Status";
 
 const Page = (props) => {
   const posts = props.posts.map((item, index) => {
@@ -15,6 +16,7 @@ const Page = (props) => {
 
   return (
     <div className={classes.page}>
+      <Status status={props.status} updateStatus={props.updateStatus} />
       <div>{props.aboutMe}</div>
       <div>
         <img src={props.photos} alt="" />

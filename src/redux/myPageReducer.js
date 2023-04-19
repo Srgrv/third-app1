@@ -3,6 +3,7 @@ import { profileAPI } from "../api/api";
 const ADD = "ADD";
 const CHANGE = "CHANGE";
 const SET_USER = "SET_USER";
+const SET_STATUS = "SET_STATUS";
 
 const defaultState = {
   user: {
@@ -20,7 +21,7 @@ const defaultState = {
     lookingForAJob: true,
     lookingForAJobDescription: "Ищуууу чесн слово",
     fullName: "Jak Zigil`man",
-    userId: 9,
+    userId: 28418,
     photos: {
       small:
         "https://social-network.samuraijs.com/activecontent/images/users/9/user-small.jpg?v=0",
@@ -30,10 +31,13 @@ const defaultState = {
   },
   inputValue: "",
   posts: ["Hello", "world"],
+  status: "",
 };
 
 const myPageReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case SET_STATUS:
+      return { ...state, status: action.status };
     case SET_USER:
       return { ...state, user: action.user };
     case CHANGE:
@@ -61,10 +65,32 @@ export const add = () => {
   return { type: ADD };
 };
 
+export const setStatus = (status) => {
+  return { type: SET_STATUS, status };
+};
+
 export const getUser = (userId) => {
   return (dispatch) => {
     profileAPI.getProfile(userId).then((response) => {
       dispatch(setUser(response));
+    });
+  };
+};
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
+    });
+  };
+};
+
+export const getProfileStatus = (userId) => {
+  return (dispatch) => {
+    profileAPI.getProfileStatus(userId).then((response) => {
+      dispatch(setStatus(response.data));
     });
   };
 };
