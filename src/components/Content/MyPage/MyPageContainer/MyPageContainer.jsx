@@ -1,7 +1,7 @@
 import React from "react";
 import Page from "./Page/Page";
 import { connect } from "react-redux";
-import { change, add, setUser, getUser } from "../../../../redux/myPageReducer";
+import { add, setUser, getUser } from "../../../../redux/myPageReducer";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import withAuthNavigate from "../../../../hoc/withAuthNavigate";
 import { compose } from "redux";
@@ -55,7 +55,6 @@ const withRouter = (Container) => {
 
 export default compose(
   connect(mapStateToProps, {
-    change,
     add,
     setUser,
     getUser,
