@@ -1,23 +1,29 @@
 import React from "react";
 import classes from "./Login.module.css";
-
-const Login = (props) => {
-  return <LoginForm {...props} />;
-};
+import { Field, reduxForm } from "redux-form";
 
 const LoginForm = (props) => {
   return (
     <div>
       <h1>{props.isAuth ? props.email : "Login"}</h1>
-      <form>
+      <form onSubmit={props.handleSubmit}>
         <div>
-          <input placeholder="login" />
+          <Field placeholder={"login"} name={"login"} component={"input"} />
         </div>
         <div>
-          <input placeholder="passoword" />
+          <Field
+            placeholder={"passoword"}
+            name={"password"}
+            component={"input"}
+          />
         </div>
         <div>
-          <input className={classes.checkbox} type="checkbox" />
+          <Field
+            className={classes.checkbox}
+            type={"checkbox"}
+            component={"input"}
+            name={"rememberMe"}
+          />
           remember me
         </div>
         <div>
@@ -26,6 +32,16 @@ const LoginForm = (props) => {
       </form>
     </div>
   );
+};
+
+const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
+
+const onSubmit = (formData) => {
+  console.log(formData);
+};
+
+const Login = (props) => {
+  return <LoginReduxForm {...props} onSubmit={onSubmit} />;
 };
 
 export default Login;
